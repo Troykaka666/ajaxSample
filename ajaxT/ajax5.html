@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <title>Ajax 5 - Jquery</title>
+</head>
+<body>
+    <div id="container">
+        <div id="result"></div>
+        <ul id="users"></ul>
+    </div>
+    <h3>Add Post</h3>
+    <form id="postForm" action="https://jsonplaceholder.typicode.com/posts">
+        <input type="text" id="title" placeholder="Title">
+        <br>
+        <textarea  id="body" cols="30" rows="10" placeholder="body"></textarea>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+
+    <script>
+    $(document).ready(()=>{
+        // $('#result').load('simple.txt', (responseTxt, statusTxt, xhr)=>{
+        //     if(statusTxt == "success"){
+        //         alert("It went fine");
+        //     }else if(statusTxt == "error"){
+        //         alert("Error: "+xhr.statusTxt);
+        //     }
+        // });
+
+        // $.get('simple.txt', function(data){
+        //     $('#result').html(data);
+        // });
+
+        // $.getJSON('users.json', function(data){
+        //     $.each(data, function(i, user){
+        //         $('ul#users').append('<li>'+user.name+'</li>');
+        //     })
+        // });
+
+        // $.ajax({
+        //    method: 'GET',
+        //    url: 'https://jsonplaceholder.typicode.com/posts',
+        //    dataType: 'json' 
+        // }).done(function(data){
+        //     console.log(data);
+        //     $.map(data, function(post, i){
+        //         $('#result').append(`<h3>${post.title}</h3><p>${post.body}</p>`)
+        //     });
+        // });
+
+
+        $('#postForm').submit(function(e){
+            e.preventDefault();
+            var title = $('#title').val();
+            var body = $('#body').val();
+            var url = $(this).attr('action');
+
+            $.post(url, {title:title, body:body}).done(function(data){
+                console.log('Post Saved');
+                console.log(data);
+                
+            });
+        });
+        
+    });
+    
+    
+    </script>
+</body>
+</html>
